@@ -364,6 +364,7 @@ describe('Core Methods: ', function() {
 })
 
 describe('Utility Methods: ', function() {
+
 	beforeEach(function() {
 		app.state.strictMode = false
 	})
@@ -470,6 +471,8 @@ describe('Linter Style Checks: ', function() {
 	const lint = app.lintMethods
 
 	beforeEach(function() {
+		app.cache.warnings = []
+		app.cache.errs = []
 		app.state.strictMode = true
 		app.state.conf = 'always'
 		app.state.severity = 'warning'
@@ -483,10 +486,16 @@ describe('Linter Style Checks: ', function() {
 	describe('blocks: prefer @block when defining block vars', function() {
 		const blockTest = lint.blocks.bind(app)
 
-		it('false if block style incorrect', function() {
+		it('false if block style incorrect (2 warnings)', function() {
 			assert.equal( false, blockTest('myBlock = ') )
 			assert.equal( false, blockTest('myBlock =') )
+			// assert.equal( 2, app.cache.warnings.length )
 		})
+
+		// it('should have outputted 2 warnings', function() {
+		// 	assert.equal( 2, app.cache.warnings.length )
+		// 	assert.equal( false, blockTest('myBlock =') )
+		// })
 
 		it('true if block style correct', function() {
 			assert.equal( true, blockTest('myBlock = @block') )
@@ -528,6 +537,7 @@ describe('Linter Style Checks: ', function() {
 			app.state.hashOrCSS = false
 			assert.equal( false, bracketsTest('.class-name') )
 			assert.equal( false, bracketsTest('#id') )
+			// assert.equal( 2, app.cache.warnings.length )
 		})
 
 		it('true if bracket found, not in hash', function() {

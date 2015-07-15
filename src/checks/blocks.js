@@ -11,6 +11,10 @@ var eqEndRe = /=$|=\s$/
 var blocks = function( line ) {
 	if ( line.indexOf( '=' ) === -1 ) { return }
 
+	// console.log( this.state.conf )
+	// console.log( this.state.severity )
+	console.log( this.cache.warnings )
+
 	var block
 
 	// if = ends the line and not a block var or hash
@@ -20,6 +24,8 @@ var blocks = function( line ) {
 	else if ( line.indexOf( '@block' ) !== -1 ) {
 		block = true
 	}
+
+	// console.log( block )
 
 	if ( this.state.conf === 'always' && !block ) {
 		this.msg( 'block variables must include @block' )
