@@ -33,6 +33,7 @@ var parse = function( err, res ) {
 			this.cache.origLine = line
 			this.cache.line = this.trimLine( line )
 			this.cache.lineNo = lineNo++
+			this.cache.columnNo = -1
 			return this.setState( line )
 		}.bind( this ) )
 
