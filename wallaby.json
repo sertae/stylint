@@ -1,0 +1,15 @@
+{
+    "files": [
+        ".stylintrc",
+        "index.js",
+        "src/**/*.*"
+    ],
+    "tests": [
+        "test/*.js",
+        "test-styl/**/*.styl"
+    ],
+    "testFramework": "mocha",
+    "env": {
+        "type": "node"
+    }
+}
